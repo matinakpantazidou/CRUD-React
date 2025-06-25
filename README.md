@@ -14,3 +14,4 @@ ALTER TABLE tasks
 ALTER COLUMN priority TYPE text USING priority::text;
 
 https://supabase.com/dashboard/project/hegyvwrkesaqtwebvarn/sql/cbe2c03c-0d66-43a2-994d-2ba8150fd62c
+
