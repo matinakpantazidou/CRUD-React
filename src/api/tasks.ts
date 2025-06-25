@@ -3,7 +3,6 @@ import { CreateTaskPayload, Task, UpdateTaskPayload } from "../types";
 
 /**
  * Fetch all tasks from the API
- * This is the only implemented endpoint for the technical interview
  */
 export const getTasks = async (): Promise<Task[]> => {
   try {
@@ -23,54 +22,62 @@ export const getTasks = async (): Promise<Task[]> => {
 /**
  * Create a new task
  *
- * TODO: This is for the candidate to implement
  */
 export const createTask = async (
   task: CreateTaskPayload
 ): Promise<Task | null> => {
-  // TODO: Implement this function
-  // The endpoint is POST ${API_URL}/tasks
-  // Remember to:
-  // - Use the correct HTTP method
-  // - Set the correct headers
-  // - Handle errors properly
-  // - Return the newly created task or null if there's an error
+  try {
+    const response = await fetch(`${API_URL}/tasks`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(task),
+    });
 
-  throw new Error("Not implemented");
+    if (!response.ok) throw new Error(`Error: ${response.status}`);
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to create task:", error);
+    return null;
+  }
 };
 
 /**
  * Update an existing task
  *
- * TODO: This is for the candidate to implement
  */
 export const updateTask = async (
   id: string,
   task: UpdateTaskPayload
 ): Promise<Task | null> => {
-  // TODO: Implement this function
-  // The endpoint is PUT ${API_URL}/tasks/:id
-  // Remember to:
-  // - Use the correct HTTP method
-  // - Set the correct headers
-  // - Handle errors properly
-  // - Return the updated task or null if there's an error
+  try {
+    const response = await fetch(`${API_URL}/tasks/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(task),
+    });
 
-  throw new Error("Not implemented");
+    if (!response.ok) throw new Error(`Error: ${response.status}`);
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to update task:", error);
+    return null;
+  }
 };
 
 /**
  * Delete a task
  *
- * TODO: This is for the candidate to implement
  */
 export const deleteTask = async (id: string): Promise<boolean> => {
-  // TODO: Implement this function
-  // The endpoint is DELETE ${API_URL}/tasks/:id
-  // Remember to:
-  // - Use the correct HTTP method
-  // - Handle errors properly
-  // - Return true if deletion was successful, false otherwise
+  try {
+    const response = await fetch(`${API_URL}/tasks/${id}`, {
+      method: "DELETE",
+    });
 
-  throw new Error("Not implemented");
+    if (!response.ok) throw new Error(`Error: ${response.status}`);
+    return true;
+  } catch (error) {
+    console.error("Failed to delete task:", error);
+    return false;
+  }
 };
